@@ -29,23 +29,14 @@
                     <label for="email" class="form-label">Email</label>
                     <input type="text" class="form-control mb-4" name="email" id="email" required>
                 </div>
-                <select class="form-select mb-4" name="state" id="state" required>
+                <select class="form-select mb-4" name="state" id="state" required disabled>
                     <option value="">Región</option>
-                    <option value="1">Region 1</option>
-                    <option value="2">Region 2</option>
-                    <option value="3">Region 3</option>
                 </select>
-                <select class="form-select mb-4" name="city" id="city" required>
+                <select class="form-select mb-4" name="city" id="city" required disabled>
                     <option value="">Comuna</option>
-                    <option value="1">Comuna 1</option>
-                    <option value="2">Comuna 2</option>
-                    <option value="3">Comuna 3</option>
                 </select>
-                <select class="form-select mb-4" name="candidate" id="candidate" required>
+                <select class="form-select mb-4" name="candidate" id="candidate" required disabled>
                     <option value="">Candidato</option>
-                    <option value="1">Candidato 1</option>
-                    <option value="2">Candidato 2</option>
-                    <option value="3">Candidato 3</option>
                 </select>
                 <p class="fs-5">¿Cómo se enteró de nosotros?</p>
                 <div class="row mb-5">
@@ -77,6 +68,12 @@
 
                 <div class="text-center">
                     <button type="submit" class="btn btn-primary btn-lg">Votar</button>
+                    <div class="spinner-border text-primary d-none" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <div id="message" class="d-none">
+                        <p class="fs-5">Gracias por votar</p>
+                    </div>
                 </div>
             </form>
         </div>

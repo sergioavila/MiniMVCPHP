@@ -2,18 +2,15 @@
 
 require_once 'model.php';
 
-class VotoController {
-    private $votoModel;
+class VoteController {
+    private $voteModel;
 
     public function __construct() {
-        $this->votoModel = new VotoModel();
+        $this->voteModel = new VoteModel();
     }
 
-    public function manejarSolicitud() {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $usuario_id = $_SESSION['usuario_id'];
-            $opcion_id = $_POST['opcion'];
-            $this->votoModel->guardarVoto($usuario_id, $opcion_id);
-        }
+    public function index() {
+        $states = $this->voteModel->getStates();
+        echo json_encode($states);
     }
 }
