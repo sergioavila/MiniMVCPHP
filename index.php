@@ -17,6 +17,14 @@
             echo $voteController->getAllCities($_GET['id']);
             exit();
         }
+        if (isset($_GET['action']) && $_GET['action'] === 'getCandidates') {
+            echo $voteController->getAllCandidates();
+            exit();
+        }
+    }
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $voteController->saveVote($_POST);
     }
     require_once 'inc/view.php';
 ?>
