@@ -11,7 +11,7 @@ $user = $_ENV['DB_USER'];
 $pass = $_ENV['DB_PASS'];
 
 try {
-    $pdo = new PDO("$type:host=$host;dbname=$database", $user, $pass);
+    $pdo = new PDO("$type:host=$host;dbname=$database;charset=utf8", $user, $pass);
 } catch (PDOException $e) {
     die("Error de conexión a la base de datos: " . $e->getMessage());
 }

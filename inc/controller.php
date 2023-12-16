@@ -9,8 +9,17 @@ class VoteController {
         $this->voteModel = new VoteModel();
     }
 
-    public function index() {
+    public function getAllStates() {
         $states = $this->voteModel->getStates();
-        echo json_encode($states);
+        return json_encode($states);
     }
+    public function getAllCities() {
+        $cities = $this->voteModel->getCities();
+        return json_encode($cities);
+    }
+    public function getAllCandidates() {
+        $candidates = $this->voteModel->getCandidates();
+        return json_encode($candidates);
+    }
+
 }
