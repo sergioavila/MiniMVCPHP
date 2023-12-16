@@ -16,3 +16,10 @@ body{
     left: 50%;
     transform: translate(-50%, -50%);
 }
+label.error{
+    color: red;
+    font-size: 12px;
+    font-weight: 400;
+    margin-top: 5px;
+    margin-bottom: 0;
+}

@@ -12,7 +12,7 @@
     <div class="card votes-card">
         <div class="card-body">
             <h1 class="fs-2 text-center mb-4">Formulario de Votación</h1>
-            <form action="" method="post">
+            <form action="" method="post" id="voteform">
                 <div class="mb-3">
                     <label for="fullname" class="form-label">Nombre Completo</label>
                     <input type="text" class="form-control" name="fullname" id="fullname" required>
@@ -23,46 +23,55 @@
                 </div>
                 <div class="mb-3">
                     <label for="rut" class="form-label">RUT</label>
-                    <input type="text" class="form-control mb-4" name="rut" id="rut" required>
+                    <input type="text" class="form-control" name="rut" id="rut" required>
                 </div>
                 <div class="mb-3">
                     <label for="email" class="form-label">Email</label>
-                    <input type="text" class="form-control mb-4" name="email" id="email" required>
+                    <input type="text" class="form-control" name="email" id="email" required>
                 </div>
-                <select class="form-select mb-4" name="state" id="state" required disabled>
-                    <option value="">Región</option>
-                </select>
-                <select class="form-select mb-4" name="city" id="city" required disabled>
-                    <option value="">Comuna</option>
-                </select>
-                <select class="form-select mb-4" name="candidate" id="candidate" required disabled>
-                    <option value="">Candidato</option>
-                </select>
+                <div class="mb-3">
+                    <select class="form-select" name="state" id="state" required disabled>
+                        <option value="">Región</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <select class="form-select" name="city" id="city" required disabled>
+                        <option value="">Comuna</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <select class="form-select" name="candidate" id="candidate" required disabled>
+                        <option value="">Candidato</option>
+                    </select>
+                </div>
                 <p class="fs-5">¿Cómo se enteró de nosotros?</p>
                 <div class="row mb-5">
                     <div class="col-md-6">
                         <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-                            <label class="form-check-label" for="flexSwitchCheckDefault">Web</label>
+                            <input class="option-group form-check-input" type="checkbox" role="switch" id="option1" name="option[]" value="1">
+                            <label class="form-check-label" for="option1">Web</label>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-                            <label class="form-check-label" for="flexSwitchCheckDefault">TV</label>
+                            <input class="option-group form-check-input" type="checkbox" role="switch" id="option2" name="option[]" value="1">
+                            <label class="form-check-label" for="option2">TV</label>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-                            <label class="form-check-label" for="flexSwitchCheckDefault">Redes Sociales</label>
+                            <input class="option-group form-check-input" type="checkbox" role="switch" id="option3" name="option[]" value="1">
+                            <label class="form-check-label" for="option3">Redes Sociales</label>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-                            <label class="form-check-label" for="flexSwitchCheckDefault">Amigo</label>
+                            <input class="option-group form-check-input" type="checkbox" role="switch" id="option4" name="option[]" value="1">
+                            <label class="form-check-label" for="option4">Amigo</label>
                         </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div id="error-group"></div>
                     </div>
                 </div>
 
@@ -78,6 +87,10 @@
             </form>
         </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="assets/js/jquery.validate.min.js"></script>
+    <script src="assets/js/additional-methods.min.js"></script>
+    <script src="assets/js/messages_es.min.js"></script>
     <script src="assets/js/app.js"></script>
 </body>
 </html>
