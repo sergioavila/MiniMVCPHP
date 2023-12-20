@@ -22,14 +22,18 @@ class VoteController {
         return json_encode($candidates);
     }
     public function saveVote($data) {
-        $vote = $this->voteModel->saveVote($data);
-        if ($vote) {
-            $_SESSION['message'] = 'Voto guardado correctamente';
-            $_SESSION['message_type'] = 'success';
+        if ($this->voteModel->saveVote($data)) {
+            return json_encode('Gracias por tu voto.');
         } else {
-            $_SESSION['message'] = 'Error al guardar el voto';
-            $_SESSION['message_type'] = 'danger';
+            return json_encode('Ha ocurrido un error.');
         }
         header('Location: index.php');
+    }
+    public function checkRut($rut) {
+        if($this->voteModel->checkRut($rut)){
+            return json_encode(true);
+        }else{
+            return json_encode('Este RUT ya esta registrado.');
+        }
     }
 }

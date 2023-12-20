@@ -6,8 +6,8 @@
     error_reporting(E_ALL);
     require_once 'inc/model.php';
     require_once 'inc/controller.php';
-
     $voteController = new VoteController();
+
     if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         if (isset($_GET['action']) && $_GET['action'] === 'getStates') {
             echo $voteController->getAllStates();
@@ -21,10 +21,6 @@
             echo $voteController->getAllCandidates();
             exit();
         }
-    }
-
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $voteController->saveVote($_POST);
     }
     require_once 'inc/view.php';
 ?>

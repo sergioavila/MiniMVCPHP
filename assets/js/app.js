@@ -91,6 +91,7 @@ jQuery.validator.addMethod(
         return this.optional(element) || validateRut(value);
     }
 );
+
 //custom checkbox group validation
 jQuery.validator.addMethod(
     "require_from_group",
@@ -105,17 +106,29 @@ jQuery.validator.addMethod(
     jQuery.validator.format("Debes seleccionar al menos {0} opciones.")
 );
 
-//check if rut exist in db
-function checkRut(rut) {
-    fetch(`?action=checkRut&rut=${rut}`)
-    .then((res) => res.json())
-    .then((data) => {
-        if(data.length > 0) {
-            alert('El RUT ingresado ya existe en la base de datos.');
-            document.getElementById('rut').value = '';
+//save vote to db
+function saveVote() {
+    let rut = $('#rut').val();
+    let fullname = $('#fullname').val();
+    let nickname = $('#nickname').val();
+    let email = $('#email').val();
+    let state = $('#state').val();
+    let city = $('#city').val();
+    let candidate = $('#candidate').val();
+    let option_web = $('#option1').is(':checked') ? 1 : 0;
+    let option_tv = $('#option2').is(':checked') ? 1 : 0;
+    let option_socialmedia = $('#option3').is(':checked') ? 1 : 0;
+    let option_referral = $('#option4').is(':checked') ? 1 : 0;
+
+    $.ajax({
+        url: '/api.php',
+        type: 'POST',
+        data: { rut: rut, fullname: fullname, nickname: nickname, email: email, state: state, city: city, candidate: candidate, option_web: option_web, option_tv: option_tv, option_socialmedia: option_socialmedia, option_referral: option_referral, action: 'saveVote' },
+        success: function(data) {
+            console.log(data);
+            $('#voteform').html('<div class="alert alert-success" role="alert">Gracias por tu voto.</div>');
         }
-    })
-    .catch((err) => console.log(err));
+    });
 }
 
 
@@ -123,7 +136,26 @@ function checkRut(rut) {
     //validate form
     jQuery("#voteform").validate({
         rules: {
-            rut: { validateRut: true },
+            rut: { required: true, validateRut: true, remote : {
+                    url: "/api.php",
+                    type: "post",
+                    dataType: 'json',
+                    data: {
+                            rut: function() {
+                                return $( "#rut" ).val();
+                            },
+                            action: 'checkRut',
+                        },
+                    complete: function(data) {
+                        console.log(data.responseJSON);
+                        if (data) {
+                            $("#rut-error").html("El RUT ya ha votado.");
+                        }else{
+                            $("#rut-error").html("");
+                        }
+                    }
+                }
+            },
             fullname: { required: true },
             nickname: { required: true, alphanumeric: true, minlength: 5 },
             email: { required: true, email: true },
@@ -134,13 +166,17 @@ function checkRut(rut) {
           },
           groups: { 'option-group': "options[]" },
           showErrors: function(errorMap, errorList) {
-            $("#error-group").html("Your form contains "
-              + this.numberOfInvalids()
-              + " errors, see details below.");
-            this.defaultShowErrors();
+            $("#error-group").html("");
+            $.each(errorList, function(index, error) {
+                $("#error-group").append("<li>" + error.message + "</li>");
+            });
           },
           messages: {
-            rut: "Debes ingresar un RUT válido.",
+            rut: {
+                required: "Ingresa tu rut.",
+                validateRut: "Ingresa un rut válido.",
+                remote: "El RUT no es válido."
+            },
             fullname: "Ingresa tu nombre completo.",
             nickname: "Ingresa tu apodo (mínimo 5 caracteres, letras y números).",
             email: "Ingresa tu correo electrónico.",
@@ -149,7 +185,9 @@ function checkRut(rut) {
             candidate: "Debes seleccionar un candidato.",
             "option[]": "Debes seleccionar al menos 2 opciones.",
           },
-          submitHandler: function() { alert("Submitted!") }
+          submitHandler: function() {
+            saveVote();
+           }
     });
     //get states from db
     getStates();
