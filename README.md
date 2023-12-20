@@ -1,3 +1,17 @@
 # MiniMVC PHP
 
-Mini sistema PHP MVC
+## Mini sistema PHP MVC
+
+- Configurar el entorno mediante el archivo .env (se entrega un archivo de ejempo)
+- Subir el dump SQL 'votes_dump.sql' para tener la estructura y relaciones en una nueva base de datos
+- Es posible correr este script localmente usando el comando 'php -S localhost:8000' (cambiar el puerto de ser necesario)
+
+## Estructura del sistema
+
+Los archivos principalles del sistema están en el directorio 'inc'
+
+Controlador (controller.php): Este es el controlador del sistema, utiliza una clase llamada 'VoteController' y los métodos: 'getAllStates', 'getAllCities', 'getAllCandidates', 'saveVote' y 'checkRut'.
+
+Modelo (model.php): Este modelo contiene la clase llamada 'VoteModel' y tiene los métodos: 'getStates', 'getCities', 'getCandidates', 'saveVote' y 'checkRut'.
+
+Vista (view.php): Este archivo contiene la vista en HTML5, llama los assets: 'style.css' y 'app.js' que se encuentran en el directio 'assets'. También se utilizan librerías externas como Bootstrap 5.3.2, jQuery 3.6.0 y jQuery Validate 1.19.5
